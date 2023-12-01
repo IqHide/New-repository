@@ -1,7 +1,7 @@
 import { getToken, GetTokenParams } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function proxy(request: NextRequest) {
+async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   let params: GetTokenParams = {
@@ -29,6 +29,8 @@ export async function proxy(request: NextRequest) {
   }
   return NextResponse.next();
 }
+
+export { proxy };
 
 export const config = {
   matcher: ['/cars/:path*'],

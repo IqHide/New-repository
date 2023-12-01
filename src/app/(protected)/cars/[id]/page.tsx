@@ -1,3 +1,5 @@
-export default function CarPage() {
+function CarPage() {
   return null;
 }
+
+export default CarPage;

@@ -8,7 +8,7 @@ interface IProps {
   onClose: () => void;
 }
 
-export default function RegistrationForm({ onClose }: IProps) {
+function RegistrationForm({ onClose }: IProps) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -104,3 +104,5 @@ export default function RegistrationForm({ onClose }: IProps) {
     </Form>
   );
 }
+
+export default RegistrationForm;

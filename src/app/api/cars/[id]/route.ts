@@ -1,7 +1,7 @@
 import { prisma } from '@/utils/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   const car = await prisma.car.findUnique({ where: { id } });
@@ -12,3 +12,5 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
   return NextResponse.json(car);
 }
+
+export { GET };

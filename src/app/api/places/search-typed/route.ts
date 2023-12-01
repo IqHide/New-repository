@@ -47,7 +47,7 @@ async function fetchByCategory(
   }));
 }
 
-export async function GET(req: NextRequest) {
+async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams.get('q');
 
   if (!query || query.trim().length === 0) {
@@ -81,3 +81,5 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ groups });
 }
+
+export { GET };

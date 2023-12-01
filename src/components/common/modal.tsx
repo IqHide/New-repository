@@ -9,7 +9,7 @@ interface IProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export default function CustomModal({ children, onClose, title, size = 'xs', isOpen }: IProps) {
+function CustomModal({ children, onClose, title, size = 'xs', isOpen }: IProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={size}>
       <ModalContent>
@@ -21,3 +21,5 @@ export default function CustomModal({ children, onClose, title, size = 'xs', isO
     </Modal>
   );
 }
+
+export default CustomModal;

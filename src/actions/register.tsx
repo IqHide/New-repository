@@ -4,7 +4,7 @@ import { IFormData } from '@/types/form-data';
 import { prisma } from '@/utils/prisma';
 import { saltAndHashPassword } from '@/utils/password';
 
-export async function registerUser(formData: IFormData) {
+async function registerUser(formData: IFormData) {
   const { email, password, confirmPassword } = formData;
 
   if (password !== confirmPassword) {
@@ -39,3 +39,5 @@ export async function registerUser(formData: IFormData) {
     return { error: 'Ошибка при регистрации' };
   }
 }
+
+export { registerUser };

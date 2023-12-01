@@ -22,7 +22,7 @@ async function isSafeHost(hostname: string): Promise<boolean> {
   return true;
 }
 
-export async function GET(request: NextRequest) {
+async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get('url');
   if (!url) return NextResponse.json({ error: 'No URL' }, { status: 400 });
 
@@ -74,3 +74,5 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to fetch image' }, { status: 502 });
   }
 }
+
+export { GET };

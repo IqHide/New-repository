@@ -3,17 +3,15 @@
 import { useState } from 'react';
 import PlacesSearch from '@/components/places/PlacesSearch';
 // import PlacesSearchByType from '@/components/places/PlacesSearchByType';
-import { Place, TypedPlace } from '@/types/places';
+import { Place } from '@/types/places';
 
-export default function PlacesPage() {
-  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
-  const [selectedTypedPlace, setSelectedTypedPlace] = useState<TypedPlace | null>(null);
+function PlacesPage() {
+  const [, setSelectedPlace] = useState<Place | null>(null);
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
       <h1 className="text-3xl font-bold">Places</h1>
       <PlacesSearch onSelect={setSelectedPlace} />
-
 
       {/*
       <div className="w-full max-w-xl border-t border-gray-200 dark:border-zinc-700 pt-6">
@@ -62,8 +60,9 @@ export default function PlacesPage() {
         )}
       </div>
     )
-  } */
-      }
-    </div >
+  } */}
+    </div>
   );
 }
+
+export default PlacesPage;

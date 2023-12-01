@@ -7,7 +7,7 @@ interface Props {
   onSelect: (place: Place) => void;
 }
 
-export default function PlacesSearch({ onSelect }: Props) {
+function PlacesSearch({ onSelect }: Props) {
   const [query, setQuery] = useState('');
   const [groups, setGroups] = useState<PlaceGroup[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -116,3 +116,5 @@ export default function PlacesSearch({ onSelect }: Props) {
     </div>
   );
 }
+
+export default PlacesSearch;
