@@ -316,6 +316,7 @@ const CarsPage = () => {
                           src={`/image-proxy?url=${encodeURIComponent(car.imageUrl)}`}
                           alt={`${car.brand} ${car.model}`}
                           fill
+                          unoptimized
                           className="object-cover rounded"
                         />
                       )}
