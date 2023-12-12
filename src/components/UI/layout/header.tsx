@@ -55,7 +55,7 @@ export default function Header() {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {siteConfig.navItems
           .filter((item) => {
-            if (item.href === "/ingredients") {
+            if (item.href === "/cars") {
               return isAuth;
             }
             return true;
