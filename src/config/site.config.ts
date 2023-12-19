@@ -7,6 +7,7 @@ export const siteConfig = {
     { href: "/about", label: "About" },
     { href: "/cars", label: "My Cars" },
     { href: "/comparison", label: "Comparison" },
+    { href: "/places", label: "Places" },
   ],
 
   pagesContent: {
