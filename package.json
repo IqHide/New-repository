@@ -18,7 +18,8 @@
     "@heroui/system": "2.4.25",
     "@heroui/theme": "2.4.25",
     "@prisma/adapter-pg": "^7.4.0",
-    "@prisma/client": "^7.3.0",
+    "@prisma/client": "^7.4.2",
+    "@prisma/extension-accelerate": "^3.0.1",
     "@tailwindcss/vite": "^4.1.18",
     "bcryptjs": "^3.0.3",
     "dompurify": "^3.3.1",
@@ -43,7 +44,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
-    "prisma": "^7.3.0",
+    "prisma": "^7.4.2",
     "tailwindcss": "^4.2.1",
     "typescript": "^5"
   }

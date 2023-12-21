@@ -36,6 +36,7 @@ export default function RegistrationForm({ onClose }: IProps) {
     <Form className="w-full max-w-xs" onSubmit={handleSubmit}>
       <Input
         isRequired
+        autoComplete="email"
         errorMessage="Please enter a valid email"
         label="Email"
         labelPlacement="outside"
@@ -60,6 +61,7 @@ export default function RegistrationForm({ onClose }: IProps) {
         placeholder="Enter your password"
         labelPlacement="outside"
         type="password"
+        autoComplete="new-password"
         classNames={{
           inputWrapper: "bg-default-100",
           input: "text-sm focus:outline-none",
@@ -77,6 +79,7 @@ export default function RegistrationForm({ onClose }: IProps) {
         placeholder="Confirm your password"
         labelPlacement="outside"
         type="password"
+        autoComplete="new-password"
         classNames={{
           inputWrapper: "bg-default-100",
           input: "text-sm focus:outline-none",
@@ -88,7 +91,7 @@ export default function RegistrationForm({ onClose }: IProps) {
         }}
       />
 
-      <div className="flex w-[100%] gap-4 items-center pt-8 justify-end">
+      <div className="flex w-full gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
           Отмена
         </Button>
