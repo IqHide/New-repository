@@ -44,10 +44,11 @@ export default async function RootLayout({
               <Header />
               <Title/>
               <main
-                className="flex flex-col max-w-[1024px] px-40px mx-auto w-full justify-start items-center my-6"
-                style={{ height: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})` }}
+                className="flex flex-col max-w-5xl px-40px mx-auto w-full justify-start items-center my-6"
+                style={{ minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})` }}
               >
                 {children}
+                
               </main>
               <footer 
                 className="flex justify-center items-center"
