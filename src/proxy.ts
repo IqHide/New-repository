@@ -10,14 +10,14 @@ export async function proxy(request: NextRequest) {
     req: request,
     secret: process.env.AUTH_SECRET,
   });
-  const protectedRoutes = ["/my cars"];
+  const protectedRoutes = ["/cars"];
 
   if (
     protectedRoutes.some((route) =>
       pathname.startsWith(route.replace(":path*", "")),
     )
   ) {
-    if (!token) { 
+    if (!token) {
       const url = new URL("/error", request.url);
       url.searchParams.set("message", "Недостаточно прав");
       return NextResponse.redirect(url);
@@ -27,5 +27,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/ingredients"],
+  matcher: ["/cars/:path*"],
 };
