@@ -4,26 +4,17 @@ import CarsForm from "@/forms/cars.form";
 import EditCarForm from "@/forms/edit-car.form";
 import { useCarsStore } from "@/store/cars.store";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 import { Button, Checkbox, Slider } from "@heroui/react";
 import TrashIcon from "@/components/UI/icons/TrashIcon";
 import PencilIcon from "@/components/UI/icons/PencilIcon";
 import CompareIcon from "@/components/UI/icons/CompareIcon";
-=======
-import { Button, Checkbox, Slider } from "@heroui/react";
-import TrashIcon from "@/components/UI/icons/TrashIcon";
-import PencilIcon from "@/components/UI/icons/PencilIcon";
->>>>>>> d66959d226b920147c80d47858aedacf14ee9c34
 import CustomModal from "@/components/common/modal";
 
 const CarsPage = () => {
   const { cars, isLoading, error, loadCars, removeCar, selectedCar, setSelectedCar } = useCarsStore();
-<<<<<<< HEAD
   const router = useRouter();
   const [comparisonIds, setComparisonIds] = useState<string[]>([]);
-=======
->>>>>>> d66959d226b920147c80d47858aedacf14ee9c34
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [onlyWithPhoto, setOnlyWithPhoto] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -33,7 +24,6 @@ const CarsPage = () => {
     loadCars();
   }, [loadCars]);
 
-<<<<<<< HEAD
   const handleCompare = (id: string) => {
     if (comparisonIds.includes(id)) {
       setComparisonIds(comparisonIds.filter((c) => c !== id));
@@ -47,8 +37,6 @@ const CarsPage = () => {
     setComparisonIds([]);
   };
 
-=======
->>>>>>> d66959d226b920147c80d47858aedacf14ee9c34
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
 
   const filteredCars = cars
@@ -144,7 +132,6 @@ const CarsPage = () => {
                     key={car.id}
                     className="border rounded-lg p-4 shadow-md relative"
                   >
-<<<<<<< HEAD
                     <div className="absolute top-2 left-2">
                       <Button
                         isIconOnly
@@ -157,8 +144,6 @@ const CarsPage = () => {
                         <CompareIcon />
                       </Button>
                     </div>
-=======
->>>>>>> d66959d226b920147c80d47858aedacf14ee9c34
                     <div className="absolute top-2 right-2 flex gap-1">
                       <Button
                         isIconOnly

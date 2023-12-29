@@ -2,15 +2,34 @@
 
 import { useState } from "react";
 import PlacesSearch from "@/components/places/PlacesSearch";
-import { Place } from "@/types/places";
+import PlacesSearchByType from "@/components/places/PlacesSearchByType";
+import { Place, TypedPlace } from "@/types/places";
 
 export default function PlacesPage() {
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
+  const [selectedTypedPlace, setSelectedTypedPlace] = useState<TypedPlace | null>(null);
 
   return (
     <div className="flex flex-col items-center gap-6 w-full">
       <h1 className="text-3xl font-bold">Places</h1>
       <PlacesSearch onSelect={setSelectedPlace} />
+
+      <div className="w-full max-w-xl border-t border-gray-200 dark:border-zinc-700 pt-6">
+        <h2 className="text-lg font-semibold mb-3">Поиск по result_type</h2>
+        <PlacesSearchByType onSelect={setSelectedTypedPlace} />
+
+        {selectedTypedPlace && (
+          <div className="mt-4 border border-gray-200 dark:border-zinc-700 rounded-lg p-5 shadow-md">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-xl font-semibold">{selectedTypedPlace.name}</h3>
+              <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-full text-gray-500">
+                {selectedTypedPlace.result_type}
+              </span>
+            </div>
+            <p className="text-sm text-gray-500 mt-1">{selectedTypedPlace.formatted_address}</p>
+          </div>
+        )}
+      </div>
 
       {selectedPlace && (
         <div className="w-full max-w-xl border border-gray-200 dark:border-zinc-700 rounded-lg p-5 shadow-md">

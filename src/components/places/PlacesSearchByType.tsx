@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Place, PlaceGroup, PlacesSearchResponse } from "@/types/places";
+import { TypedPlace, TypedPlaceGroup, TypedPlacesResponse } from "@/types/places";
 
 interface Props {
-  onSelect: (place: Place) => void;
+  onSelect: (place: TypedPlace) => void;
 }
 
-export default function PlacesSearch({ onSelect }: Props) {
+export default function PlacesSearchByType({ onSelect }: Props) {
   const [query, setQuery] = useState("");
-  const [groups, setGroups] = useState<PlaceGroup[]>([]);
+  const [groups, setGroups] = useState<TypedPlaceGroup[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,8 +29,8 @@ export default function PlacesSearch({ onSelect }: Props) {
       setIsLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/api/places/search?q=${encodeURIComponent(query)}`);
-        const data: PlacesSearchResponse = await res.json();
+        const res = await fetch(`/api/places/search-typed?q=${encodeURIComponent(query)}`);
+        const data: TypedPlacesResponse = await res.json();
 
         if (data.error) {
           setError(data.error);
@@ -57,7 +57,7 @@ export default function PlacesSearch({ onSelect }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSelect = (place: Place) => {
+  const handleSelect = (place: TypedPlace) => {
     setQuery(place.name);
     setIsOpen(false);
     onSelect(place);

@@ -1,48 +1,72 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Place, PlaceGroup } from "@/types/places";
+
+const GEOAPIFY_URL = "https://api.geoapify.com/v1/geocode/search";
+
+async function fetchPlaces(text: string, limit: number, apiKey: string): Promise<Place[]> {
+  const url = new URL(GEOAPIFY_URL);
+  url.searchParams.set("text", text);
+  url.searchParams.set("limit", String(limit));
+  url.searchParams.set("apiKey", apiKey);
+
+  const response = await fetch(url);
+  if (!response.ok) return [];
+
+  const data = await response.json();
+
+  return (data.features ?? [])
+    .map((feature: any) => ({
+      place_id: feature.properties.place_id,
+      name: feature.properties.name ?? feature.properties.formatted,
+      formatted_address: feature.properties.formatted,
+      geometry: {
+        location: {
+          lat: feature.geometry.coordinates[1],
+          lng: feature.geometry.coordinates[0],
+        },
+      },
+      types: [feature.properties.result_type],
+      rating: undefined,
+      user_ratings_total: undefined,
+    }));
+}
 
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams.get("q");
 
   if (!query || query.trim().length === 0) {
-    return NextResponse.json({ places: [] });
+    return NextResponse.json({ groups: [] });
   }
 
   const apiKey = process.env.GEOAPIFY_API_KEY;
-
   if (!apiKey) {
     return NextResponse.json({ error: "API key not configured" }, { status: 500 });
   }
 
-  const url = new URL("https://api.geoapify.com/v1/geocode/search");
-  url.searchParams.set("text", query);
-  url.searchParams.set("limit", "7");
-  url.searchParams.set("apiKey", apiKey);
+  const [airports, hotels, general] = await Promise.all([
+    fetchPlaces(`airport ${query}`, 3, apiKey),
+    fetchPlaces(`hotel ${query}`, 2, apiKey),
+    fetchPlaces(query, 10, apiKey),
+  ]);
 
-  const response = await fetch(url.toString());
+  const seenIds = new Set<string>();
 
+  const dedupe = (places: Place[]): Place[] =>
+    places.filter((p) => {
+      if (seenIds.has(p.place_id)) return false;
+      seenIds.add(p.place_id);
+      return true;
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.error("Geoapify error:", JSON.stringify(errorData));
-    return NextResponse.json({ error: "Geoapify API error" }, { status: response.status });
-  }
+  const airportGroup = dedupe(airports.slice(0, 3));
+  const hotelGroup = dedupe(hotels.slice(0, 2));
+  const addressGroup = dedupe(general);
 
-  const data = await response.json();
+  const groups: PlaceGroup[] = [
+    { label: "Аэропорты", places: airportGroup },
+    { label: "Отели", places: hotelGroup },
+    { label: "Адреса", places: addressGroup },
+  ].filter((g) => g.places.length > 0);
 
-  const places = (data.features ?? []).map((feature: any) => ({
-    place_id: feature.properties.place_id,
-    name: feature.properties.name ?? feature.properties.formatted,
-    formatted_address: feature.properties.formatted,
-    geometry: {
-      location: {
-        lat: feature.geometry.coordinates[1],
-        lng: feature.geometry.coordinates[0],
-      },
-    },
-    types: [feature.properties.result_type],
-    rating: undefined,
-    user_ratings_total: undefined,
-  }));
-
-  return NextResponse.json({ places });
+  return NextResponse.json({ groups });
 }
