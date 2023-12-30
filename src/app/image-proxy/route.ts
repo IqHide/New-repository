@@ -1,13 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
+import { promises as dns } from "dns";
 
 // SSRF protection: block private/internal IP ranges and hostnames
 const BLOCKED_HOSTNAMES = ["localhost", "127.0.0.1", "0.0.0.0", "::1"];
 const PRIVATE_IP_REGEX =
   /^(10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|169\.254\.|127\.|::1|fc00:|fe80:)/;
 
+async function isSafeHost(hostname: string): Promise<boolean> {
+  if (PRIVATE_IP_REGEX.test(hostname)) return false;
+
+  try {
+    const result = await dns.lookup(hostname, { all: true });
+    for (const { address } of result) {
+      if (PRIVATE_IP_REGEX.test(address)) return false;
+    }
+  } catch {
+    return false;
+  }
+
+  return true;
+}
+
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get("url");
-
   if (!url) return NextResponse.json({ error: "No URL" }, { status: 400 });
 
   let parsed: URL;
@@ -21,11 +36,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "HTTPS only" }, { status: 400 });
   }
 
-  const hostname = parsed.hostname;
-  if (
-    BLOCKED_HOSTNAMES.includes(hostname) ||
-    PRIVATE_IP_REGEX.test(hostname)
-  ) {
+  const isSafe = await isSafeHost(parsed.hostname);
+  if (!isSafe) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

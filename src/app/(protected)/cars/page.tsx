@@ -4,13 +4,17 @@ import CarsForm from "@/forms/cars.form";
 import EditCarForm from "@/forms/edit-car.form";
 import { useCarsStore } from "@/store/cars.store";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button, Checkbox, Slider } from "@heroui/react";
 import TrashIcon from "@/components/UI/icons/TrashIcon";
 import PencilIcon from "@/components/UI/icons/PencilIcon";
+import CompareIcon from "@/components/UI/icons/CompareIcon";
 import CustomModal from "@/components/common/modal";
 
 const CarsPage = () => {
   const { cars, isLoading, error, loadCars, removeCar, selectedCar, setSelectedCar } = useCarsStore();
+  const router = useRouter();
+  const [comparisonIds, setComparisonIds] = useState<string[]>([]);
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
   const [onlyWithPhoto, setOnlyWithPhoto] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -19,6 +23,19 @@ const CarsPage = () => {
   useEffect(() => {
     loadCars();
   }, [loadCars]);
+
+  const handleCompare = (id: string) => {
+    if (comparisonIds.includes(id)) {
+      setComparisonIds(comparisonIds.filter((c) => c !== id));
+      return;
+    }
+    if (comparisonIds.length === 0) {
+      setComparisonIds([id]);
+      return;
+    }
+    router.push(`/comparison?car1=${comparisonIds[0]}&car2=${id}`);
+    setComparisonIds([]);
+  };
 
   const brands = Array.from(new Set(cars.map((car) => car.brand)));
 
@@ -115,6 +132,18 @@ const CarsPage = () => {
                     key={car.id}
                     className="border rounded-lg p-4 shadow-md relative"
                   >
+                    <div className="absolute top-2 left-2">
+                      <Button
+                        isIconOnly
+                        size="sm"
+                        variant={comparisonIds.includes(car.id) ? "solid" : "light"}
+                        color="primary"
+                        onPress={() => handleCompare(car.id)}
+                        aria-label="Сравнить автомобиль"
+                      >
+                        <CompareIcon />
+                      </Button>
+                    </div>
                     <div className="absolute top-2 right-2 flex gap-1">
                       <Button
                         isIconOnly
