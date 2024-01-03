@@ -10,6 +10,8 @@ const config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  roots: ['<rootDir>/src'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.pnpm-store/'],
 };
 
 module.exports = createJestConfig(config);
