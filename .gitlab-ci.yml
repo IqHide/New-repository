@@ -31,7 +31,7 @@ typecheck:
 test:
   stage: test
   script:
-    - pnpm test -- --ci
+    - pnpm test --ci
 
 build:
   stage: build
