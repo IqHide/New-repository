@@ -11,8 +11,10 @@ const CarsForm = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    await addCar(formData);
-    form.reset();
+    const success = await addCar(formData);
+    if (success) {
+      form.reset();
+    }
   };
 
   return (
@@ -21,9 +23,7 @@ const CarsForm = () => {
       className="w-full max-w-xl flex flex-col gap-4 p-4 border rounded-lg shadow-md"
     >
       <h2 className="text-2xl font-bold">Добавить автомобиль</h2>
-
       {error && <p className="text-red-500 text-sm">{error}</p>}
-
       <Input
         isRequired
         label="Бренд"
@@ -35,7 +35,6 @@ const CarsForm = () => {
           input: "text-sm focus:outline-none",
         }}
       />
-
       <Input
         isRequired
         label="Модель"
@@ -47,7 +46,6 @@ const CarsForm = () => {
           input: "text-sm focus:outline-none",
         }}
       />
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Input
           isRequired
@@ -60,7 +58,6 @@ const CarsForm = () => {
             input: "text-sm focus:outline-none",
           }}
         />
-
         <Input
           isRequired
           label="1/4 мили"
@@ -72,7 +69,6 @@ const CarsForm = () => {
             input: "text-sm focus:outline-none",
           }}
         />
-
         <Input
           isRequired
           label="Нюрбургринг"
@@ -85,7 +81,6 @@ const CarsForm = () => {
           }}
         />
       </div>
-
       <Input
         label="Ссылка на изображение (опционально)"
         labelPlacement="outside"
@@ -97,7 +92,6 @@ const CarsForm = () => {
           input: "text-sm focus:outline-none",
         }}
       />
-
       <div className="flex w-full justify-end pt-4">
         <Button
           color="primary"
