@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import signInWithCredentials from "@/actions/sign-in";
-import { Form, Input, Button } from "@heroui/react";
-import { useState, useActionState } from "react";
+import signInWithCredentials from '@/actions/sign-in';
+import { Form, Input, Button } from '@heroui/react';
+import { useState } from 'react';
 
 interface IProps {
   onClose: () => void;
@@ -10,9 +10,9 @@ interface IProps {
 
 export default function LoginForm({ onClose }: IProps) {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -42,12 +42,15 @@ export default function LoginForm({ onClose }: IProps) {
         placeholder="Enter your email"
         type="email"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
-        onChange={(e) => { setAuthError(null); setFormData({ ...formData, email: e.target.value }); }}
+        onChange={(e) => {
+          setAuthError(null);
+          setFormData({ ...formData, email: e.target.value });
+        }}
         validate={(value) => {
-          if (!value) return "Где почта, долбоёб?";
+          if (!value) return 'Где почта, долбоёб?';
           return null;
         }}
       />
@@ -60,26 +63,27 @@ export default function LoginForm({ onClose }: IProps) {
         labelPlacement="outside"
         type="password"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
-        onChange={(e) => { setAuthError(null); setFormData({ ...formData, password: e.target.value }); }}
+        onChange={(e) => {
+          setAuthError(null);
+          setFormData({ ...formData, password: e.target.value });
+        }}
         validate={(value) => {
-          if (!value) return "Где пароль, долбоёб?";
+          if (!value) return 'Где пароль, долбоёб?';
           return null;
         }}
       />
 
-      {authError && (
-        <p className="text-danger text-sm w-full">{authError}</p>
-      )}
+      {authError && <p className="text-danger text-sm w-full">{authError}</p>}
 
       <div className="flex w-full gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
           Отмена
         </Button>
         <Button color="primary" type="submit">
-          Войти (в жопу BMW'шнику?)
+          {"Войти (в жопу BMW'шнику?)"}
         </Button>
       </div>
     </Form>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useCarsStore } from "@/store/cars.store";
-import { useEffect } from "react";
-import React from "react";
+import { useCarsStore } from '@/store/cars.store';
+import { useEffect } from 'react';
+import React from 'react';
 
 export default function Home() {
   const { cars, isLoading, error, loadCars } = useCarsStore();
@@ -18,7 +18,6 @@ export default function Home() {
       <div className="flex flex-col items-center gap-6 w-full">
         <h1 className="text-3xl font-bold">Последние автомобили</h1>
 
-
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
         {isLoading && <p>Загрузка...</p>}
@@ -32,9 +31,15 @@ export default function Home() {
               {lastCars.map((car) => (
                 <div key={car.id} className="border rounded-lg p-4 shadow-md">
                   {car.imageUrl && (
-                    <img src={car.imageUrl} alt={`${car.brand} ${car.model}`} className="w-full h-48 object-cover rounded mb-2" />
+                    <img
+                      src={car.imageUrl}
+                      alt={`${car.brand} ${car.model}`}
+                      className="w-full h-48 object-cover rounded mb-2"
+                    />
                   )}
-                  <h3 className="text-xl font-semibold">{car.brand} {car.model}</h3>
+                  <h3 className="text-xl font-semibold">
+                    {car.brand} {car.model}
+                  </h3>
                   <p>0-100 км/ч: {car.timeToOneHundred} сек</p>
                   <p>1/4 мили: {car.timeToQuater} сек</p>
                   <p>Нюрбургринг: {car.nurburgringTime}</p>

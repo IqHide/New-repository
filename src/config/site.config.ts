@@ -1,23 +1,23 @@
 export const siteConfig = {
-  title: "AutoRu",
-  description: "Best site in the world. BMW сосатб",
+  title: 'AutoRu',
+  description: 'Best site in the world. BMW сосатб',
 
   navItems: [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/cars", label: "My Cars" },
-    { href: "/comparison", label: "Comparison" },
-    { href: "/places", label: "Places" },
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/cars', label: 'My Cars' },
+    { href: '/comparison', label: 'Comparison' },
+    { href: '/places', label: 'Places' },
   ],
 
   pagesContent: {
-    "/": {
-      content: "здесь будут машинки...",
+    '/': {
+      content: 'здесь будут машинки...',
     },
-    "/about": {
-      content: "Что-то тут будет более подробное",
+    '/about': {
+      content: 'Что-то тут будет более подробное',
     },
-    "/cars": {
+    '/cars': {
       content: `
       <h1>Привет, это мои машинки</h1>
       <p>БМВ для геев кста</p>

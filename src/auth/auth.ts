@@ -1,19 +1,19 @@
-import NextAuth, { CredentialsSignin } from "next-auth";
-import bcryptjs from "bcryptjs";
-import { ZodError } from "zod";
-import Credentials from "next-auth/providers/credentials";
-import { signInSchema } from "../schema/zod";
+import NextAuth, { CredentialsSignin } from 'next-auth';
+import bcryptjs from 'bcryptjs';
+import { ZodError } from 'zod';
+import Credentials from 'next-auth/providers/credentials';
+import { signInSchema } from '../schema/zod';
 // Your own logic for dealing with plaintext password strings; be careful!
-import { getUserFromDb } from "@/utils/user";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "../utils/prisma";
+import { getUserFromDb } from '@/utils/user';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from '../utils/prisma';
 
 class UserNotFoundError extends CredentialsSignin {
-  code = "USER_NOT_FOUND";
+  code = 'USER_NOT_FOUND';
 }
 
 class InvalidPasswordError extends CredentialsSignin {
-  code = "INVALID_PASSWORD";
+  code = 'INVALID_PASSWORD';
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -21,13 +21,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {
         try {
-          const { email, password } =
-            await signInSchema.parseAsync(credentials);
+          const { email, password } = await signInSchema.parseAsync(credentials);
 
           const user = await getUserFromDb(email);
 
@@ -35,10 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new UserNotFoundError();
           }
 
-          const isPasswordValid = await bcryptjs.compare(
-            password,
-            user.password,
-          );
+          const isPasswordValid = await bcryptjs.compare(password, user.password);
 
           if (!isPasswordValid) {
             throw new InvalidPasswordError();
@@ -55,7 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 3600,
   },
   secret: process.env.NEXTAUTH_SECRET,

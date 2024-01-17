@@ -1,17 +1,16 @@
-"use client";
+'use client';
 
-import { useAuthStore } from "@/store/auth.store";
-import { useCarsStore } from "@/store/cars.store";
+import { useAuthStore } from '@/store/auth.store';
+import { useCarsStore } from '@/store/cars.store';
 
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 interface IProps {
   children: React.ReactNode;
 }
 
 const AppLoader = ({ children }: IProps) => {
-
   const { data: session, status } = useSession();
   const { loadCars } = useCarsStore();
   const { isAuth, setAuthState } = useAuthStore();
@@ -27,6 +26,6 @@ const AppLoader = ({ children }: IProps) => {
   }, [isAuth, loadCars]);
 
   return <>{children}</>;
-}
+};
 
 export default AppLoader;
