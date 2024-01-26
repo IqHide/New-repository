@@ -18,8 +18,9 @@ model User {
   email    String @unique
   password String
 
-  accounts Account[]
-  sessions Session[]
+  accounts      Account[]
+  sessions      Session[]
+  filterPresets FilterPreset[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -66,8 +67,6 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-
-
 enum Category {
   VEGETABLES
   FRUITS
@@ -86,13 +85,32 @@ enum Unit {
 }
 
 model Car {
-  id               String @id @default(cuid())
+  id               String  @id @default(cuid())
   brand            String
   model            String
-  timeToOneHundred String @map("time_to_one_hundred")
-  timeToQuater     String @map("time_to_quater")
-  nurburgringTime  String @map("nurburgring_time")
+  timeToOneHundred String  @map("time_to_one_hundred")
+  timeToQuater     String  @map("time_to_quater")
+  nurburgringTime  String  @map("nurburgring_time")
   imageUrl         String? @map("image_url")
 
   @@map("cars")
+}
+
+model FilterPreset {
+  id              String   @id @default(cuid())
+  name            String
+  userId          String   @map("user_id")
+  brand           String?
+  onlyWithPhoto   Boolean  @default(false) @map("only_with_photo")
+  accelerationMin Float    @map("acceleration_min")
+  accelerationMax Float    @map("acceleration_max")
+  quarterMileMin  Float    @map("quarter_mile_min")
+  quarterMileMax  Float    @map("quarter_mile_max")
+  nurburgringMin  Float    @map("nurburgring_min")
+  nurburgringMax  Float    @map("nurburgring_max")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("filter_presets")
 }
