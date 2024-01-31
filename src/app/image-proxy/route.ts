@@ -38,10 +38,6 @@ export async function GET(request: NextRequest) {
       signal: AbortSignal.timeout(10000),
     });
 
-    console.log("[image-proxy] url:", url);
-    console.log("[image-proxy] status:", response.status);
-    console.log("[image-proxy] content-type:", response.headers.get("content-type"));
-
     if (!response.ok) {
       console.error("[image-proxy] fetch failed:", response.status, response.statusText);
       return NextResponse.json({ error: "Failed to fetch image" }, { status: 502 });
