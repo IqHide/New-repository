@@ -1,7 +1,8 @@
 "use client";
 
 import { useAuthStore } from "@/store/auth.store";
-import { useIngredientStore } from "@/store/ingredient.store";
+import { useCarsStore } from "@/store/cars.store";
+
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
@@ -12,7 +13,7 @@ interface IProps {
 const AppLoader = ({ children }: IProps) => {
 
   const { data: session, status } = useSession();
-  const { loadIngredients } = useIngredientStore();
+  const { loadCars } = useCarsStore();
   const { isAuth, setAuthState } = useAuthStore();
 
   useEffect(() => {
@@ -21,9 +22,9 @@ const AppLoader = ({ children }: IProps) => {
 
   useEffect(() => {
     if (isAuth) {
-      loadIngredients();
+      loadCars();
     }
-  }, [isAuth, loadIngredients]);
+  }, [isAuth, loadCars]);
 
   return <>{children}</>;
 }

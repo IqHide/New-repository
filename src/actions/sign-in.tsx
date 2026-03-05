@@ -2,21 +2,17 @@
 
 import { signIn } from "@/auth/auth";
 
-async function signInWithCredentials(email:string, password:string) {
-    try {
-        const result = await signIn ("credentials", {
-            email,
-            password,
-            redirect: false
-        });
-
-        return result;
-        
+async function signInWithCredentials(email: string, password: string) {
+  try {
+    await signIn("credentials", { email, password, redirect: false });
+    return { success: true };
+  } catch (error: any) {
+    const code = error?.cause?.err?.code ?? error?.code;
+    if (code === "USER_NOT_FOUND") {
+      return { error: "Такого пользователя не существует" };
     }
-    catch (error) {
-        console.error("Ошибка авторизации!", error);
-        throw error;
-    }
+    return { error: "Неверные данные для входа" };
+  }
 }
 
 export default signInWithCredentials;

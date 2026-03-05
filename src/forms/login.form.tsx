@@ -14,16 +14,19 @@ export default function LoginForm({ onClose }: IProps) {
     password: "",
     confirmPassword: "",
   });
-
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
 
-    await signInWithCredentials(formData.email, formData.password);
+    const result = await signInWithCredentials(formData.email, formData.password);
+
+    if (result?.error) {
+      setAuthError(result.error);
+      return;
+    }
 
     window.location.reload();
-    
     onClose();
   };
 
@@ -41,7 +44,7 @@ export default function LoginForm({ onClose }: IProps) {
           inputWrapper: "bg-default-100",
           input: "text-sm focus:outline-none",
         }}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        onChange={(e) => { setAuthError(null); setFormData({ ...formData, email: e.target.value }); }}
         validate={(value) => {
           if (!value) return "Где почта, долбоёб?";
           return null;
@@ -58,14 +61,18 @@ export default function LoginForm({ onClose }: IProps) {
           inputWrapper: "bg-default-100",
           input: "text-sm focus:outline-none",
         }}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        onChange={(e) => { setAuthError(null); setFormData({ ...formData, password: e.target.value }); }}
         validate={(value) => {
           if (!value) return "Где пароль, долбоёб?";
           return null;
         }}
       />
 
-      <div className="flex w-[100%] gap-4 items-center pt-8 justify-end">
+      {authError && (
+        <p className="text-danger text-sm w-full">{authError}</p>
+      )}
+
+      <div className="flex w-full gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
           Отмена
         </Button>
