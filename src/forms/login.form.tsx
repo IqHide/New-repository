@@ -34,6 +34,7 @@ export default function LoginForm({ onClose }: IProps) {
     <Form className="w-full max-w-xs" onSubmit={handleSubmit}>
       <Input
         isRequired
+        autoComplete="email"
         errorMessage="Please enter a valid email"
         label="Email"
         labelPlacement="outside"
@@ -54,6 +55,7 @@ export default function LoginForm({ onClose }: IProps) {
       <Input
         isRequired
         name="password"
+        autoComplete="current-password"
         placeholder="Enter your password"
         labelPlacement="outside"
         type="password"
