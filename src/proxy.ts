@@ -1,15 +1,29 @@
-import { getToken } from "next-auth/jwt";
+import { getToken, GetTokenParams } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function proxy(request: NextRequest) {
   console.log("Middleware запущен!", request.nextUrl.pathname);
-
   const { pathname } = request.nextUrl;
-  console.log("А вот это пафнейм", pathname);
-  const token = await getToken({
+
+  let params: GetTokenParams = {
     req: request,
-    secret: process.env.AUTH_SECRET,
-  });
+    secret: process.env.AUTH_SECRET ?? "secret"
+  };
+
+  console.log(params, "Это объект params");
+  console.log(params.cookieName, "Это cookieName ДО");
+
+  if (process.env.NODE_ENV === "production") {
+    params = {
+      ...params,
+      cookieName: "__Secure-authjs.session-token"
+    };
+  }
+
+  console.log(params.cookieName, "Это cookieName ПОСЛЕ");
+
+  const token = await getToken(params);
+
   const protectedRoutes = ["/cars"];
 
   if (

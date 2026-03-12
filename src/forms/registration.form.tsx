@@ -14,6 +14,7 @@ export default function RegistrationForm({ onClose }: IProps) {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,12 +23,18 @@ export default function RegistrationForm({ onClose }: IProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
 
+
     e.preventDefault();
     console.log("Form submitted", formData);
 
     const result = await registerUser(formData);
 
+    if ('error' in result) {
+      setError(result.error);
+      return;
+    }
     console.log(result);
+
 
     onClose();
   };
@@ -90,6 +97,8 @@ export default function RegistrationForm({ onClose }: IProps) {
           return null;
         }}
       />
+
+      {error && <p className="text-danger text-sm w-full">{error}</p>}
 
       <div className="flex w-full gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
