@@ -1,20 +1,28 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 
-const ErrorPage = () => {
+const ErrorContent = () => {
   const searchParams = useSearchParams();
   const message = searchParams.get("message") || "Неизвестная ошибка";
 
   return (
-    <div className="flex justify-center items-center"  >
-      <p className="text-red-500 text-xl" >
-        {message}
-      </p>
-    </div>
-  )
+    <p className="text-red-500 text-xl">
+      {message}
+    </p>
+  );
 }
 
+const ErrorPage = () => {
+  return (
+    <div className="flex justify-center items-center">
+      <Suspense>
+        <ErrorContent />
+      </Suspense>
+    </div>
+  );
+}
 
 export default ErrorPage;

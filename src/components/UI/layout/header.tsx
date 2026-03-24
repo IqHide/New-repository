@@ -22,8 +22,6 @@ export const SiteLogo = () => {
   );
 };
 
-
-
 export default function Header() {
   const pathname = usePathname();
 

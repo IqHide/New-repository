@@ -22,20 +22,13 @@ export default function RegistrationForm({ onClose }: IProps) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-
-
     e.preventDefault();
-    console.log("Form submitted", formData);
-
     const result = await registerUser(formData);
 
     if ('error' in result) {
       setError(result.error);
       return;
     }
-    console.log(result);
-
-
     onClose();
   };
 
