@@ -2,6 +2,7 @@
 
 import { useCarsStore } from "@/store/cars.store";
 import { useEffect } from "react";
+import React from "react";
 
 export default function Home() {
   const { cars, isLoading, error, loadCars } = useCarsStore();
