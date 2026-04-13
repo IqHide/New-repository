@@ -1,9 +1,9 @@
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 
-export async function getUserFromDb(email:string) {
-    return await prisma.user.findFirst({
-        where: {
-            email
-        }
-    });
+export async function getUserFromDb(email: string) {
+  return await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
 }

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { registerUser } from "@/actions/register";
-import { Form, Input, Button } from "@heroui/react";
-import { useState } from "react";
+import { registerUser } from '@/actions/register';
+import { Form, Input, Button } from '@heroui/react';
+import { useState } from 'react';
 
 interface IProps {
   onClose: () => void;
@@ -10,9 +10,9 @@ interface IProps {
 
 export default function RegistrationForm({ onClose }: IProps) {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -44,13 +44,13 @@ export default function RegistrationForm({ onClose }: IProps) {
         placeholder="Enter your email"
         type="email"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         validate={(value) => {
-          if (!value) return "Где почта, долбоёб?";
-          if (!validateEmail(value)) return "Неверный email";
+          if (!value) return 'Где почта, долбоёб?';
+          if (!validateEmail(value)) return 'Неверный email';
           return null;
         }}
       />
@@ -63,12 +63,12 @@ export default function RegistrationForm({ onClose }: IProps) {
         type="password"
         autoComplete="new-password"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         validate={(value) => {
-          if (!value) return "Enter your password?";
+          if (!value) return 'Enter your password?';
           return null;
         }}
       />
@@ -81,12 +81,12 @@ export default function RegistrationForm({ onClose }: IProps) {
         type="password"
         autoComplete="new-password"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
         validate={(value) => {
-          if (!value) return "Enter your password?";
+          if (!value) return 'Enter your password?';
           return null;
         }}
       />

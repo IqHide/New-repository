@@ -1,33 +1,29 @@
-import { getToken, GetTokenParams } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { getToken, GetTokenParams } from 'next-auth/jwt';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   let params: GetTokenParams = {
     req: request,
-    secret: process.env.AUTH_SECRET ?? "secret"
+    secret: process.env.AUTH_SECRET ?? 'secret',
   };
 
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === 'production') {
     params = {
       ...params,
-      cookieName: "__Secure-authjs.session-token"
+      cookieName: '__Secure-authjs.session-token',
     };
   }
 
   const token = await getToken(params);
 
-  const protectedRoutes = ["/cars"];
+  const protectedRoutes = ['/cars'];
 
-  if (
-    protectedRoutes.some((route) =>
-      pathname.startsWith(route.replace(":path*", "")),
-    )
-  ) {
+  if (protectedRoutes.some((route) => pathname.startsWith(route.replace(':path*', '')))) {
     if (!token) {
-      const url = new URL("/error", request.url);
-      url.searchParams.set("message", "Недостаточно прав");
+      const url = new URL('/error', request.url);
+      url.searchParams.set('message', 'Недостаточно прав');
       return NextResponse.redirect(url);
     }
   }
@@ -35,5 +31,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/cars/:path*"],
+  matcher: ['/cars/:path*'],
 };

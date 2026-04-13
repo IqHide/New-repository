@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { FormEvent } from "react";
-import { useCarsStore } from "@/store/cars.store";
-import { Form, Input, Button } from "@heroui/react";
+import { FormEvent } from 'react';
+import { useCarsStore } from '@/store/cars.store';
+import { Form, Input, Button } from '@heroui/react';
 
 const CarsForm = () => {
   const { addCar, isLoading, error } = useCarsStore();
@@ -31,8 +31,8 @@ const CarsForm = () => {
         name="brand"
         placeholder="BMW"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
       />
       <Input
@@ -42,8 +42,8 @@ const CarsForm = () => {
         name="model"
         placeholder="M5 CS"
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
       />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -54,8 +54,8 @@ const CarsForm = () => {
           name="timeToOneHundred"
           placeholder="0:00"
           classNames={{
-            inputWrapper: "bg-default-100",
-            input: "text-sm focus:outline-none",
+            inputWrapper: 'bg-default-100',
+            input: 'text-sm focus:outline-none',
           }}
         />
         <Input
@@ -65,8 +65,8 @@ const CarsForm = () => {
           name="timeToQuater"
           placeholder="0:00"
           classNames={{
-            inputWrapper: "bg-default-100",
-            input: "text-sm focus:outline-none",
+            inputWrapper: 'bg-default-100',
+            input: 'text-sm focus:outline-none',
           }}
         />
         <Input
@@ -76,8 +76,8 @@ const CarsForm = () => {
           name="nurburgringTime"
           placeholder="0:00:000"
           classNames={{
-            inputWrapper: "bg-default-100",
-            input: "text-sm focus:outline-none",
+            inputWrapper: 'bg-default-100',
+            input: 'text-sm focus:outline-none',
           }}
         />
       </div>
@@ -88,17 +88,13 @@ const CarsForm = () => {
         type="url"
         placeholder="https://..."
         classNames={{
-          inputWrapper: "bg-default-100",
-          input: "text-sm focus:outline-none",
+          inputWrapper: 'bg-default-100',
+          input: 'text-sm focus:outline-none',
         }}
       />
       <div className="flex w-full justify-end pt-4">
-        <Button
-          color="primary"
-          type="submit"
-          isDisabled={isLoading}
-        >
-          {isLoading ? "Сохраняем..." : "Добавить автомобиль"}
+        <Button color="primary" type="submit" isDisabled={isLoading}>
+          {isLoading ? 'Сохраняем...' : 'Добавить автомобиль'}
         </Button>
       </div>
     </Form>
@@ -106,4 +102,3 @@ const CarsForm = () => {
 };
 
 export default CarsForm;
-

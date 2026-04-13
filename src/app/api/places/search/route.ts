@@ -1,38 +1,49 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Place, PlaceGroup } from "@/types/places";
+import { NextRequest, NextResponse } from 'next/server';
+import { Place, PlaceGroup } from '@/types/places';
 
-const GEOAPIFY_URL = "https://api.geoapify.com/v1/geocode/search";
+interface GeoapifyFeature {
+  properties: {
+    place_id: string;
+    name?: string;
+    formatted: string;
+    result_type?: string;
+  };
+  geometry: {
+    coordinates: [number, number];
+  };
+}
+
+const GEOAPIFY_URL = 'https://api.geoapify.com/v1/geocode/search';
 
 async function fetchPlaces(text: string, limit: number, apiKey: string): Promise<Place[]> {
   const url = new URL(GEOAPIFY_URL);
-  url.searchParams.set("text", text);
-  url.searchParams.set("limit", String(limit));
-  url.searchParams.set("apiKey", apiKey);
+  url.searchParams.set('text', text);
+  url.searchParams.set('limit', String(limit));
+  url.searchParams.set('apiKey', apiKey);
 
   const response = await fetch(url);
   if (!response.ok) return [];
 
   const data = await response.json();
 
-  return (data.features ?? [])
-    .map((feature: any) => ({
-      place_id: feature.properties.place_id,
-      name: feature.properties.name ?? feature.properties.formatted,
-      formatted_address: feature.properties.formatted,
-      geometry: {
-        location: {
-          lat: feature.geometry.coordinates[1],
-          lng: feature.geometry.coordinates[0],
-        },
+  return (data.features ?? []).map((feature: GeoapifyFeature) => ({
+    place_id: feature.properties.place_id,
+    name: feature.properties.name ?? feature.properties.formatted,
+    formatted_address: feature.properties.formatted,
+    geometry: {
+      location: {
+        lat: feature.geometry.coordinates[1],
+        lng: feature.geometry.coordinates[0],
       },
-      types: [feature.properties.result_type],
-      rating: undefined,
-      user_ratings_total: undefined,
-    }));
+    },
+    types: [feature.properties.result_type],
+    rating: undefined,
+    user_ratings_total: undefined,
+  }));
 }
 
 export async function GET(req: NextRequest) {
-  const query = req.nextUrl.searchParams.get("q");
+  const query = req.nextUrl.searchParams.get('q');
 
   if (!query || query.trim().length === 0) {
     return NextResponse.json({ groups: [] });
@@ -40,7 +51,7 @@ export async function GET(req: NextRequest) {
 
   const apiKey = process.env.GEOAPIFY_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: "API key not configured" }, { status: 500 });
+    return NextResponse.json({ error: 'API key not configured' }, { status: 500 });
   }
 
   const [airports, hotels, general] = await Promise.all([
@@ -63,9 +74,9 @@ export async function GET(req: NextRequest) {
   const addressGroup = dedupe(general);
 
   const groups: PlaceGroup[] = [
-    { label: "Аэропорты", places: airportGroup },
-    { label: "Отели", places: hotelGroup },
-    { label: "Адреса", places: addressGroup },
+    { label: 'Аэропорты', places: airportGroup },
+    { label: 'Отели', places: hotelGroup },
+    { label: 'Адреса', places: addressGroup },
   ].filter((g) => g.places.length > 0);
 
   return NextResponse.json({ groups });

@@ -1,12 +1,20 @@
-"use client";
+'use client';
 
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 const data = [
   { name: 'a1', value: 300 },
   { name: 'a2', value: 200 },
   { name: 'a3', value: 800 },
-  { name: 'a4', value: 600 }
+  { name: 'a4', value: 600 },
 ];
 
 export default function LineChartPage() {

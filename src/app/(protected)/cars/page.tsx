@@ -1,18 +1,19 @@
-"use client";
+'use client';
 
-import CarsForm from "@/forms/cars.form";
-import EditCarForm from "@/forms/edit-car.form";
-import { useCarsStore } from "@/store/cars.store";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button, Checkbox, Slider } from "@heroui/react";
-import TrashIcon from "@/components/UI/icons/TrashIcon";
-import PencilIcon from "@/components/UI/icons/PencilIcon";
-import CompareIcon from "@/components/UI/icons/CompareIcon";
-import CustomModal from "@/components/common/modal";
+import CarsForm from '@/forms/cars.form';
+import EditCarForm from '@/forms/edit-car.form';
+import { useCarsStore } from '@/store/cars.store';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button, Checkbox, Slider } from '@heroui/react';
+import TrashIcon from '@/components/UI/icons/TrashIcon';
+import PencilIcon from '@/components/UI/icons/PencilIcon';
+import CompareIcon from '@/components/UI/icons/CompareIcon';
+import CustomModal from '@/components/common/modal';
 
 const CarsPage = () => {
-  const { cars, isLoading, error, loadCars, removeCar, selectedCar, setSelectedCar } = useCarsStore();
+  const { cars, isLoading, error, loadCars, removeCar, selectedCar, setSelectedCar } =
+    useCarsStore();
   const router = useRouter();
   const [comparisonIds, setComparisonIds] = useState<string[]>([]);
   const [activeBrand, setActiveBrand] = useState<string | null>(null);
@@ -65,7 +66,7 @@ const CarsPage = () => {
           <div className="shrink-0">
             <Button
               size="sm"
-              variant={filtersOpen ? "solid" : "bordered"}
+              variant={filtersOpen ? 'solid' : 'bordered'}
               onPress={() => setFiltersOpen((prev) => !prev)}
             >
               Фильтры
@@ -78,7 +79,7 @@ const CarsPage = () => {
                   <p className="text-sm font-semibold mb-2">Марка</p>
                   <div className="flex flex-col gap-1">
                     <button
-                      className={`text-left text-sm px-2 py-1 rounded ${activeBrand === null ? "bg-primary text-white" : "hover:bg-default-100"}`}
+                      className={`text-left text-sm px-2 py-1 rounded ${activeBrand === null ? 'bg-primary text-white' : 'hover:bg-default-100'}`}
                       onClick={() => setActiveBrand(null)}
                     >
                       Все
@@ -86,7 +87,7 @@ const CarsPage = () => {
                     {brands.map((brand) => (
                       <button
                         key={brand}
-                        className={`text-left text-sm px-2 py-1 rounded ${activeBrand === brand ? "bg-primary text-white" : "hover:bg-default-100"}`}
+                        className={`text-left text-sm px-2 py-1 rounded ${activeBrand === brand ? 'bg-primary text-white' : 'hover:bg-default-100'}`}
                         onClick={() => setActiveBrand(brand)}
                       >
                         {brand}
@@ -110,11 +111,7 @@ const CarsPage = () => {
                   className="w-full"
                 />
 
-                <Checkbox
-                  isSelected={onlyWithPhoto}
-                  onValueChange={setOnlyWithPhoto}
-                  size="sm"
-                >
+                <Checkbox isSelected={onlyWithPhoto} onValueChange={setOnlyWithPhoto} size="sm">
                   Только с фото
                 </Checkbox>
               </div>
@@ -128,15 +125,12 @@ const CarsPage = () => {
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 {filteredCars.map((car) => (
-                  <div
-                    key={car.id}
-                    className="border rounded-lg p-4 shadow-md relative"
-                  >
+                  <div key={car.id} className="border rounded-lg p-4 shadow-md relative">
                     <div className="absolute top-2 left-2">
                       <Button
                         isIconOnly
                         size="sm"
-                        variant={comparisonIds.includes(car.id) ? "solid" : "light"}
+                        variant={comparisonIds.includes(car.id) ? 'solid' : 'light'}
                         color="primary"
                         onPress={() => handleCompare(car.id)}
                         aria-label="Сравнить автомобиль"
@@ -195,9 +189,7 @@ const CarsPage = () => {
         title="Редактировать автомобиль"
         size="lg"
       >
-        {selectedCar && (
-          <EditCarForm car={selectedCar} onClose={() => setSelectedCar(null)} />
-        )}
+        {selectedCar && <EditCarForm car={selectedCar} onClose={() => setSelectedCar(null)} />}
       </CustomModal>
     </div>
   );

@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { Car } from "@/types/cars";
-import { getCars, createCar, deleteCar, editCar as editCarAction } from "@/actions/car";
+import { create } from 'zustand';
+import { Car } from '@/types/cars';
+import { getCars, createCar, deleteCar, editCar as editCarAction } from '@/actions/car';
 
 interface CarsState {
   cars: Car[];
@@ -30,14 +30,14 @@ export const useCarsStore = create<CarsState>((set) => ({
         set({ cars: carsList.carsList, isLoading: false });
       } else {
         set({
-          error: carsList.error ?? "Ошибка загрзуки машины с сервера",
+          error: carsList.error ?? 'Ошибка загрзуки машины с сервера',
           isLoading: false,
         });
       }
     } catch (error) {
-      console.log("Ошибка загрузки машины:", error);
+      console.log('Ошибка загрузки машины:', error);
       set({
-        error: "Ошибка загрзуки машины с сервера",
+        error: 'Ошибка загрзуки машины с сервера',
         isLoading: false,
       });
     }
@@ -60,9 +60,9 @@ export const useCarsStore = create<CarsState>((set) => ({
         return false;
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
       set({
-        error: "Ошибка при создании нового автомобиля",
+        error: 'Ошибка при создании нового автомобиля',
         isLoading: false,
       });
       return false;
@@ -81,14 +81,14 @@ export const useCarsStore = create<CarsState>((set) => ({
         }));
       } else {
         set({
-          error: result.error ?? "Ошибка при удалении автомобиля",
+          error: result.error ?? 'Ошибка при удалении автомобиля',
           isLoading: false,
         });
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
       set({
-        error: "Ошибка при удалении автомобиля",
+        error: 'Ошибка при удалении автомобиля',
         isLoading: false,
       });
     }
@@ -110,8 +110,8 @@ export const useCarsStore = create<CarsState>((set) => ({
         return false;
       }
     } catch (error) {
-      console.log("error", error);
-      set({ error: "Ошибка при редактировании автомобиля", isLoading: false });
+      console.log('error', error);
+      set({ error: 'Ошибка при редактировании автомобиля', isLoading: false });
       return false;
     }
   },

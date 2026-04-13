@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { Place, PlaceGroup, PlacesSearchResponse } from "@/types/places";
+import { useState, useEffect, useRef } from 'react';
+import { Place, PlaceGroup, PlacesSearchResponse } from '@/types/places';
 
 interface Props {
   onSelect: (place: Place) => void;
 }
 
 export default function PlacesSearch({ onSelect }: Props) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [groups, setGroups] = useState<PlaceGroup[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function PlacesSearch({ onSelect }: Props) {
           setIsOpen(true);
         }
       } catch {
-        setError("Ошибка при поиске");
+        setError('Ошибка при поиске');
       } finally {
         setIsLoading(false);
       }
@@ -53,8 +53,8 @@ export default function PlacesSearch({ onSelect }: Props) {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleSelect = (place: Place) => {
@@ -94,8 +94,12 @@ export default function PlacesSearch({ onSelect }: Props) {
                     onClick={() => handleSelect(place)}
                     className="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
                   >
-                    <p className="font-medium text-sm text-gray-900 dark:text-gray-100">{place.name}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{place.formatted_address}</p>
+                    <p className="font-medium text-sm text-gray-900 dark:text-gray-100">
+                      {place.name}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {place.formatted_address}
+                    </p>
                   </li>
                 ))}
               </ul>

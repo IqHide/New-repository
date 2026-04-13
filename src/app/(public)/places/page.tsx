@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import PlacesSearch from "@/components/places/PlacesSearch";
-import PlacesSearchByType from "@/components/places/PlacesSearchByType";
-import { Place, TypedPlace } from "@/types/places";
+import { useState } from 'react';
+import PlacesSearch from '@/components/places/PlacesSearch';
+import PlacesSearchByType from '@/components/places/PlacesSearchByType';
+import { Place, TypedPlace } from '@/types/places';
 
 export default function PlacesPage() {
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
@@ -52,7 +52,7 @@ export default function PlacesPage() {
                   key={type}
                   className="text-xs px-2 py-1 bg-gray-100 dark:bg-zinc-800 rounded-full text-gray-600 dark:text-gray-300"
                 >
-                  {type.replaceAll("_", " ")}
+                  {type.replaceAll('_', ' ')}
                 </span>
               ))}
             </div>

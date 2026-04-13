@@ -1,12 +1,12 @@
-import React from "react";
-import { FC } from "react";
+import React from 'react';
+import { FC } from 'react';
 
 interface IProps {
   children: React.ReactNode;
 }
 
-const AboutLayout :FC<IProps> = ({children}) => {
-  return <section>{children}</section>
-}
+const AboutLayout: FC<IProps> = ({ children }) => {
+  return <section>{children}</section>;
+};
 
 export default AboutLayout;

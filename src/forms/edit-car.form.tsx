@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { FormEvent } from "react";
-import { useCarsStore } from "@/store/cars.store";
-import { Form, Input, Button } from "@heroui/react";
-import { Car } from "@/types/cars";
+import { FormEvent } from 'react';
+import { useCarsStore } from '@/store/cars.store';
+import { Form, Input, Button } from '@heroui/react';
+import { Car } from '@/types/cars';
 
 interface IProps {
   car: Car;
@@ -21,10 +21,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
   };
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      className="w-full flex flex-col gap-4"
-    >
+    <Form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <Input
@@ -33,7 +30,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
         labelPlacement="outside"
         name="brand"
         defaultValue={car.brand}
-        classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+        classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
       />
 
       <Input
@@ -42,7 +39,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
         labelPlacement="outside"
         name="model"
         defaultValue={car.model}
-        classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+        classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -52,7 +49,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
           labelPlacement="outside"
           name="timeToOneHundred"
           defaultValue={car.timeToOneHundred}
-          classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+          classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
         />
 
         <Input
@@ -61,7 +58,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
           labelPlacement="outside"
           name="timeToQuater"
           defaultValue={car.timeToQuater}
-          classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+          classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
         />
 
         <Input
@@ -70,7 +67,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
           labelPlacement="outside"
           name="nurburgringTime"
           defaultValue={car.nurburgringTime}
-          classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+          classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
         />
       </div>
 
@@ -79,8 +76,8 @@ const EditCarForm = ({ car, onClose }: IProps) => {
         labelPlacement="outside"
         name="imageUrl"
         type="url"
-        defaultValue={car.imageUrl ?? ""}
-        classNames={{ inputWrapper: "bg-default-100", input: "text-sm" }}
+        defaultValue={car.imageUrl ?? ''}
+        classNames={{ inputWrapper: 'bg-default-100', input: 'text-sm' }}
       />
 
       <div className="flex w-full justify-end gap-2 pt-4">
@@ -88,7 +85,7 @@ const EditCarForm = ({ car, onClose }: IProps) => {
           Отмена
         </Button>
         <Button color="primary" type="submit" isDisabled={isLoading}>
-          {isLoading ? "Сохраняем..." : "Сохранить"}
+          {isLoading ? 'Сохраняем...' : 'Сохранить'}
         </Button>
       </div>
     </Form>

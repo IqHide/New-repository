@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find /c/Users/Toshka/ToshkaProger/2_autoru -type f -name next.config.* -o -name .env*)"
+      "Bash(find /c/Users/Toshka/ToshkaProger/2_autoru -type f -name next.config.* -o -name .env*)",
+      "Bash(pnpm lint:*)"
     ]
   }
 }

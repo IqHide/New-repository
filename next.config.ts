@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 /** @type {import('next').NextConfig} */
 
 const COMPARISON_ZONE_URL = process.env.COMPARISON_ZONE_URL || 'http://localhost:3002';
