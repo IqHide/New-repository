@@ -1,4 +1,4 @@
-'use client';
+/* 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import { TypedPlace, TypedPlaceGroup, TypedPlacesResponse } from '@/types/places';
@@ -116,3 +116,4 @@ export default function PlacesSearchByType({ onSelect }: Props) {
     </div>
   );
 }
+ */

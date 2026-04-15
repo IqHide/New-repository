@@ -25,6 +25,8 @@ async function fetchPlaces(text: string, limit: number, apiKey: string): Promise
   if (!response.ok) return [];
 
   const data = await response.json();
+  console.log(JSON.stringify(data, null, 2));
+
 
   return (data.features ?? []).map((feature: GeoapifyFeature) => ({
     place_id: feature.properties.place_id,
