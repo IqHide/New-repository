@@ -38,6 +38,9 @@ importers:
       '@recharts/devtools':
         specifier: github:recharts/devtools
         version: https://codeload.github.com/recharts/devtools/tar.gz/40a1f2345e2a108a52a3906c0666df591c92bf88(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(recharts@3.8.0(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)(redux@5.0.1))
+      '@reduxjs/toolkit':
+        specifier: ^2.11.2
+        version: 2.11.2(react-redux@9.2.0(@types/react@19.2.7)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.1.18(vite@7.3.0(@types/node@20.19.27)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.1)(terser@5.46.1))
@@ -80,6 +83,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@19.2.7)(react@19.2.3)(redux@5.0.1)
       recharts:
         specifier: ^3.8.0
         version: 3.8.0(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react-is@18.3.1)(react@19.2.3)(redux@5.0.1)
