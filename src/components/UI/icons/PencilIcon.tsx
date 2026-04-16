@@ -1,4 +1,4 @@
-export default function PencilIcon() {
+function PencilIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,3 +16,5 @@ export default function PencilIcon() {
     </svg>
   );
 }
+
+export default PencilIcon;

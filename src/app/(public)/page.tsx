@@ -3,8 +3,9 @@
 import { useCarsStore } from '@/store/cars.store';
 import { useEffect } from 'react';
 import React from 'react';
+import Image from 'next/image';
 
-export default function Home() {
+function Home() {
   const { cars, isLoading, error, loadCars } = useCarsStore();
 
   useEffect(() => {
@@ -31,11 +32,15 @@ export default function Home() {
               {lastCars.map((car) => (
                 <div key={car.id} className="border rounded-lg p-4 shadow-md">
                   {car.imageUrl && (
-                    <img
-                      src={car.imageUrl}
-                      alt={`${car.brand} ${car.model}`}
-                      className="w-full h-48 object-cover rounded mb-2"
-                    />
+                    <div className="relative w-full h-48 mb-2">
+                      <Image
+                        src={car.imageUrl}
+                        alt={`${car.brand} ${car.model}`}
+                        fill
+                        unoptimized
+                        className="object-cover rounded"
+                      />
+                    </div>
                   )}
                   <h3 className="text-xl font-semibold">
                     {car.brand} {car.model}
@@ -52,3 +57,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

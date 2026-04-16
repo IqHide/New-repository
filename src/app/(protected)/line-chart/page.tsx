@@ -17,7 +17,7 @@ const data = [
   { name: 'a4', value: 600 },
 ];
 
-export default function LineChartPage() {
+function LineChartPage() {
   return (
     <div>
       <h3>Line-chart</h3>
@@ -33,3 +33,5 @@ export default function LineChartPage() {
     </div>
   );
 }
+
+export default LineChartPage;

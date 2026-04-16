@@ -3,11 +3,10 @@ import { baseApi } from './base-api';
 
 const filterPresetsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
     // GET /api/filter-presets → кэшируется под тегом FilterPreset
     getFilterPresets: builder.query<FilterPreset[], void>({
       query: () => '/filter-presets',
-      providesTags: ['FilterPreset'],  // этот кэш помечен тегом
+      providesTags: ['FilterPreset'], // этот кэш помечен тегом
     }),
 
     // POST /api/filter-presets → после успеха инвалидирует кэш getFilterPresets

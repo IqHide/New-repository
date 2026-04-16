@@ -10,6 +10,7 @@ import TrashIcon from '@/components/UI/icons/TrashIcon';
 import PencilIcon from '@/components/UI/icons/PencilIcon';
 import CompareIcon from '@/components/UI/icons/CompareIcon';
 import CustomModal from '@/components/common/modal';
+import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/store/redux/hooks';
 import {
   applyPreset,
@@ -64,7 +65,7 @@ const CarsPage = () => {
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
-  }
+  };
 
   const handleSavePreset = async () => {
     if (!presetName.trim()) return;
@@ -210,13 +211,8 @@ const CarsPage = () => {
                 </Checkbox>
 
                 {/* Сбросить фильтры */}
-                <div className='flex flex-col gap-2 pt-2'>
-                  <Button
-                    size="md"
-                    variant="flat"
-                    color="primary"
-                    onPress={handleResetFilters}
-                  >
+                <div className="flex flex-col gap-2 pt-2">
+                  <Button size="md" variant="flat" color="primary" onPress={handleResetFilters}>
                     Сбросить фильтры
                   </Button>
                 </div>
@@ -241,7 +237,6 @@ const CarsPage = () => {
                     Сохранить
                   </Button>
                 </div>
-
               </div>
             )}
 
@@ -271,7 +266,6 @@ const CarsPage = () => {
                 ))}
               </div>
             )}
-
           </div>
 
           {/* Карточки */}
@@ -316,12 +310,13 @@ const CarsPage = () => {
                         <TrashIcon />
                       </Button>
                     </div>
-                    <div className="w-full h-48 rounded mb-2 overflow-hidden bg-default-100">
+                    <div className="relative w-full h-48 rounded mb-2 overflow-hidden bg-default-100">
                       {car.imageUrl && (
-                        <img
+                        <Image
                           src={`/image-proxy?url=${encodeURIComponent(car.imageUrl)}`}
                           alt={`${car.brand} ${car.model}`}
-                          className="w-full h-48 object-cover rounded"
+                          fill
+                          className="object-cover rounded"
                         />
                       )}
                     </div>

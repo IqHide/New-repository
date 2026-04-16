@@ -2,10 +2,7 @@ import { auth } from '@/auth/auth';
 import { prisma } from '@/utils/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function DELETE(
-  _req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
 
   if (!session) {
@@ -24,3 +21,5 @@ export async function DELETE(
 
   return new NextResponse(null, { status: 204 });
 }
+
+export { DELETE };

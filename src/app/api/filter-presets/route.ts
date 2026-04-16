@@ -2,7 +2,7 @@ import { auth } from '@/auth/auth';
 import { prisma } from '@/utils/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+async function GET() {
   const session = await auth();
 
   console.log(session);
@@ -19,7 +19,7 @@ export async function GET() {
   return NextResponse.json(presets);
 }
 
-export async function POST(req: NextRequest) {
+async function POST(req: NextRequest) {
   const session = await auth();
 
   if (!session) {
@@ -45,3 +45,5 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(preset, { status: 201 });
 }
+
+export { GET, POST };

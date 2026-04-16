@@ -16,7 +16,7 @@ export const SiteLogo = () => {
   return <Image src="/Mercedes-Logo.png" alt="Mercedes-Logo" width={32} height={32} priority />;
 };
 
-export default function Header() {
+function Header() {
   const pathname = usePathname();
 
   const { isAuth, session, status, setAuthState } = useAuthStore();
@@ -119,3 +119,5 @@ export default function Header() {
     </Navbar>
   );
 }
+
+export default Header;

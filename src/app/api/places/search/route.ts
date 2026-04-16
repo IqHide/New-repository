@@ -27,7 +27,6 @@ async function fetchPlaces(text: string, limit: number, apiKey: string): Promise
   const data = await response.json();
   console.log(JSON.stringify(data, null, 2));
 
-
   return (data.features ?? []).map((feature: GeoapifyFeature) => ({
     place_id: feature.properties.place_id,
     name: feature.properties.name ?? feature.properties.formatted,
@@ -44,7 +43,7 @@ async function fetchPlaces(text: string, limit: number, apiKey: string): Promise
   }));
 }
 
-export async function GET(req: NextRequest) {
+async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams.get('q');
 
   if (!query || query.trim().length === 0) {
@@ -83,3 +82,5 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ groups });
 }
+
+export { GET };

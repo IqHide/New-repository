@@ -8,10 +8,12 @@ interface IProps {
   onClose: () => void;
 }
 
-export default function LoginModal({ isOpen, onClose }: IProps) {
+function LoginModal({ isOpen, onClose }: IProps) {
   return (
     <CustomModal isOpen={isOpen} onClose={onClose} title="Вход в аккаунт">
       <LoginForm onClose={onClose} />
     </CustomModal>
   );
 }
+
+export default LoginModal;
