@@ -20,4 +20,4 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
-// здарова, это просто изменения для проверки
+// ещё один коммент для теста комита
