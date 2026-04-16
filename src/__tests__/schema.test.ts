@@ -18,14 +18,6 @@ describe('signInSchema', () => {
     }).toThrow();
   });
 
-  it('просто тест ', () => {
-    const result = signInSchema.parse({
-      email: '',
-      password: '123456',
-    });
-    expect(result).toBe(false);
-  });
-
   it('отклоняет пустой email', () => {
     const result = signInSchema.safeParse({
       email: '',
